@@ -107,23 +107,21 @@ public class KakaoController extends HttpServlet {
 
 			KakaoDAO dao = new KakaoDAO();
 			BlacklistDAO blackdao = new BlacklistDAO();
-
+			
 			try {
 				MemberDTO dto = dao.checkLogin(user_name, user_k);
 				
-				// 블랙리스트인지 조회
 				String user_id = dto.getUser_id();
 				if(blackdao.selectById(user_id)) {
 					System.out.println("블랙리스트 로그인 실패");
-                    request.setAttribute("black_rs", false);
-                    request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
+	                request.setAttribute("black_rs", false);
+	                request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
 				}else if (dto != null) {
 					System.out.println("로그인 성공");
 					request.setAttribute("rs", true);
 					HttpSession session = request.getSession();
 					session.setAttribute("loginSession", dto);
 					request.getRequestDispatcher("/toHome.home").forward(request, response);
-
 				} else {
 					System.out.println("로그인 실패");
 					request.setAttribute("rs", false);

@@ -169,7 +169,7 @@ public class MemberController extends HttpServlet {
                     HttpSession session = request.getSession();
                     session.setAttribute("loginSession", dto);
                     request.getRequestDispatcher("/toHome.home").forward(request, response);
-                } else {
+                } else{
                     System.out.println("로그인 실패");
                     request.setAttribute("rs", false);
                     request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
